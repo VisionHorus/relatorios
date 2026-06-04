@@ -29,10 +29,10 @@
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{
-      font-family:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+      font-family:"poppins",system-ui,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
       background:var(--bg);
       color:var(--text);
-      line-height:1.55;
+      line-height:1.3;
     }
     a{text-decoration:none;color:inherit}
     .page{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
@@ -250,7 +250,7 @@
     <main>
       <div class="topbar">
         <div>
-          <strong>Relatório + Proposta Comercial</strong>
+          <strong>Relatório</strong>
           <div class="small">Baseado no diagnóstico de reputação digital e posicionamento local</div>
         </div>
         <button class="btn" onclick="window.print()">Salvar como PDF</button>
@@ -259,53 +259,53 @@
       <div class="content">
         <section class="hero reveal" id="visao">
           <div class="badge">Relatório estratégico 2026</div>
-          <h2>Presença digital, reputação e crescimento para o <span>Tamo Junto Botequim</span>.</h2>
-          <p>Um dashboard comercial direto para mostrar onde a marca está forte, onde perde oportunidade e como transformar Google, site, tráfego e conteúdo em mais visibilidade para as unidades.</p>
+          <h2>O que os clientes encontram quando procuram o <span>Tamo Junto Botequim.</span> no Google?</h2>
+          <p>Analisamos como as unidades aparecem nos resultados de busca, avaliações, fotos e informações disponíveis online para identificar pontos fortes, oportunidades de melhoria e possíveis perdas de clientes para concorrentes.</p>
           <div class="hero-meta">
             <span>📍 Salvador, Bahia</span>
             <span>🏢 3 unidades analisadas</span>
             <span>⭐ 327+ avaliações consideradas</span>
             <span>🚀 Alto potencial de marketing</span>
+            <span>🔎 Dados públicos encontrados no Google</span>
           </div>
         </section>
-
+          <br>
         <section class="reveal">
           <div class="section-title">
             <div>
-              <h3>Scorecard executivo</h3>
-              <p>Resumo rápido da situação digital da marca, com foco em reputação, confiança, força competitiva e potencial de crescimento.</p>
+              <h3>Resumo da análise</h3>
+              <p>Veja rapidamente quais pontos ajudam o negócio a atrair clientes e quais podem estar reduzindo a confiança de quem está pesquisando antes de visitar uma unidade.</p>
             </div>
           </div>
-
           <div class="grid grid-4">
             <div class="card">
-              <div class="label">Reputação geral</div>
+              <div class="label">Percepção dos clientes</div>
               <div class="metric amber">6.8</div>
               <div class="sub">Saúde puxa a reputação; São Marcos e Resgate reduzem a média.</div>
             </div>
             <div class="card">
-              <div class="label">Autoridade local</div>
+              <div class="label">Força da presença no Google</div>
               <div class="metric green">7.8</div>
               <div class="sub">Marca forte no Largo da Saúde e participação no Comida di Buteco.</div>
             </div>
             <div class="card">
-              <div class="label">Força competitiva</div>
+              <div class="label">Capacidade de competir nas buscas</div>
               <div class="metric amber">6.2</div>
               <div class="sub">Boa em uma unidade, vulnerável nas demais por falta de SEO local.</div>
             </div>
             <div class="card">
-              <div class="label">Potencial de marketing</div>
+              <div class="label">Potencial para atrair mais clientes</div>
               <div class="metric green">9.0</div>
               <div class="sub">Identidade, caranguejo, música, promoções e experiência compartilhável.</div>
             </div>
           </div>
         </section>
-
+          <br>
         <section id="unidades" class="reveal">
           <div class="section-title">
             <div>
-              <h3>Diagnóstico por unidade</h3>
-              <p>A marca não tem um problema único. Cada unidade está em um estágio diferente de presença, reputação e maturidade digital.</p>
+              <h3>Como cada unidade aparece para quem pesquisa no Google</h3>
+              <p>Embora todas façam parte da mesma marca, cada unidade transmite uma impressão diferente para quem pesquisa antes de decidir onde ir.</p>
             </div>
           </div>
 
@@ -337,19 +337,19 @@
               <div class="unit-body">
                 <div class="row"><span>Nota Google</span><span>3.6★</span></div>
                 <div class="row"><span>Avaliações</span><span>8</span></div>
-                <div class="row"><span>Perfil</span><span><span class="tag warn" style="color: var(--amber);">Pouco otimizado</span></span></div>
+                <div class="row"><span>Perfil</span><span><span class="tag bad" style="color: #991b1b;">Não reivindicado</span></span></div>
                 <div class="row"><span>Diferencial</span><span>Viveiro de caranguejo <i style="color:#8f97a7; font-weight: bold;">(Não aproveitado)</i></span></div>
                 <div class="row"><span>Gargalo</span><span>Banheiros precários</span></div>
               </div>
             </div>
           </div>
         </section>
-
+        <br>
         <section id="ferida" class="reveal">
           <div class="section-title">
             <div>
-              <h3>A ferida comercial</h3>
-              <p>O problema não é falta de marca. É perda de intenção de compra no momento em que o cliente decide onde vai sair.</p>
+              <h3>Onde clientes podem estar sendo perdidos</h3>
+              <p>O Tamo Junto já possui reconhecimento e uma base sólida de clientes. O desafio está em como algumas unidades aparecem para quem está pesquisando opções no Google antes de sair de casa.</p>
             </div>
           </div>
 
@@ -370,6 +370,7 @@
             </div>
           </div>
         </section>
+        <br>
 
         <section id="sentimento" class="reveal">
           <div class="section-title">
@@ -423,12 +424,17 @@
             </div>
           </div>
         </section>
+        <br>
 
         <section id="seo" class="reveal">
           <div class="section-title">
             <div>
-              <h3>SEO local e pesquisa por IA</h3>
-              <p>Hoje o cliente não pergunta apenas “qual o Instagram?”. Ele pesquisa por intenção: onde ir, perto de mim, com música, com caranguejo, para jogo ou São João.</p>
+              <h3>Como as pessoas procuram lugares como o seu</h3>
+                <br>
+              <p>Hoje a decisão de onde comer ou assistir um jogo normalmente começa com uma pesquisa no Google. Muitas pessoas também utilizam ferramentas de inteligência artificial para pedir recomendações.
+                <br>
+                <br>
+                Quando as informações estão completas, atualizadas e bem avaliadas, as chances de escolha aumentam.</p>
             </div>
           </div>
 
@@ -443,23 +449,24 @@
               </ul>
             </div>
             <div class="card">
-              <h4>O que Google e IA procuram</h4>
+              <h4>O que ajuda um estabelecimento a aparecer mais nas pesquisas</h4>
               <ul>
-                <li>Perfil Google completo e atualizado.</li>
+                <li>Informações completas e atualizadas..</li>
                 <li>Site com informações consistentes.</li>
                 <li>Avaliações respondidas e fotos recentes.</li>
                 <li>Conteúdo alinhado com as buscas do público.</li>
-                <li>Autoridade digital e consistência entre canais.</li>
+                <li>Presença consistente entre Google, site e redes sociais.</li>
               </ul>
             </div>
           </div>
         </section>
+        <br>
 
         <section id="marketing" class="reveal">
           <div class="section-title">
             <div>
-              <h3>Marketing indireto: a voz do cliente</h3>
-              <p>As melhores campanhas podem nascer das próprias frases dos clientes, porque elas carregam linguagem real, emoção e prova social.</p>
+              <h3>O que os próprios clientes estão dizendo</h3>
+              <p>As avaliações revelam exatamente como as pessoas descrevem a experiência no Tamo Junto. Essas percepções ajudam a identificar os pontos mais valorizados pelos clientes e também oportunidades de melhoria.</p>
             </div>
           </div>
 
@@ -472,18 +479,19 @@
             <div class="quote"><p>“Próximo a tudo. Simplesmente vão!”</p><small>Call-to-action orgânico</small></div>
           </div>
         </section>
+        <br>
 
         <section id="swot" class="reveal">
           <div class="section-title">
             <div>
-              <h3>SWOT estratégico</h3>
+              <h3>Panorama do Negócio</h3>
               <p>Forças, fraquezas, oportunidades e riscos organizados para orientar a proposta de implantação.</p>
             </div>
           </div>
 
           <div class="swot">
             <div class="card forcas">
-              <h4>Forças</h4>
+              <h4>Forças - O que mais agrada os clientes</h4>
               <ul>
                 <li>Marca consolidada desde 2018.</li>
                 <li>Culinária elogiada: espetinhos, farofa, caranguejo.</li>
@@ -493,7 +501,7 @@
               </ul>
             </div>
             <div class="card fraquezas">
-              <h4>Fraquezas</h4>
+              <h4>Fraquezas - Pontos que merecem atenção</h4>
               <ul>
                 <li>Presença digital fragmentada entre unidades.</li>
                 <li>São Marcos com nota baixa e perfil não reivindicado.</li>
@@ -503,7 +511,7 @@
               </ul>
             </div>
             <div class="card oportunidades">
-              <h4>Oportunidades</h4>
+              <h4>Oportunidades - O que pode ser aproveitado</h4>
               <ul>
                 <li>Otimizar Google Business das unidades.</li>
                 <li>Usar site para fortalecer SEO e campanhas.</li>
@@ -513,7 +521,7 @@
               </ul>
             </div>
             <div class="card riscos">
-              <h4>Riscos</h4>
+              <h4>Riscos - O que pode reduzir resultados</h4>
               <ul>
                 <li>Concorrentes ocuparem o espaço nas buscas locais.</li>
                 <li>Cliente desistir antes da visita pela nota baixa.</li>
@@ -524,27 +532,29 @@
             </div>
           </div>
         </section>
+        <br>
 
         <section class="reveal">
           <div class="section-title">
             <div>
-              <h3>Recomendações prioritárias</h3>
+              <h3>O que recomendamos fazer primeiro</h3>
               <p>Ações que conectam o diagnóstico à estratégia comercial oferecida.</p>
             </div>
           </div>
 
           <div class="rec">
-            <div class="rec-item"><div class="num">1</div><div><h4>Otimizar Google Business das unidades <span class="priority urgente">URGENTE</span></h4><p>Corrigir informações, categorias, descrição, fotos, links, rotas e resposta às avaliações.</p></div></div>
-            <div class="rec-item"><div class="num">2</div><div><h4>Construir site profissional <span class="priority alta">ALTA</span></h4><p>Base própria para SEO, autoridade, campanhas, rastreamento, credibilidade e pesquisas por IA.</p></div></div>
-            <div class="rec-item"><div class="num">3</div><div><h4>Gestão de tráfego por unidade <span class="priority alta">ALTA</span></h4><p>Campanhas locais, impulsionamentos e estratégia por eventos, promoções, público e localização.</p></div></div>
+            <div class="rec-item"><div class="num">1</div><div><h4>Organizar e atualizar os perfis no Google <span class="priority urgente">URGENTE</span></h4><p>Garantir que todas as informações estejam corretas, completas e transmitam confiança para quem está pesquisando.</p></div></div>
+            <div class="rec-item"><div class="num">2</div><div><h4>Criar uma presença digital própria e confiável <span class="priority alta">ALTA</span></h4><p>Base própria para SEO, autoridade, campanhas, rastreamento, credibilidade e pesquisas por IA.</p></div></div>
+            <div class="rec-item"><div class="num">3</div><div><h4>Atrair mais pessoas das regiões próximas <span class="priority alta">ALTA</span></h4><p>Campanhas locais, impulsionamentos e estratégia por eventos, promoções, público e localização.</p></div></div>
             <div class="rec-item"><div class="num">4</div><div><h4>Conteúdo real em conjunto <span class="priority media">MÉDIA</span></h4><p>A equipe Vision orienta ideias, campanha e uso do material. A captação dos vídeos fica com a equipe/proprietários do bar.</p></div></div>
           </div>
         </section>
+        <br>
 
         <section class="reveal">
           <div class="section-title">
             <div>
-              <h3>Próximos passos</h3>
+              <h3>Como podemos colocar isso em prática</h3>
               <p>Fluxo simples para começar sem travar a operação do bar.</p>
             </div>
           </div>
@@ -569,9 +579,12 @@
                 <li>Uso estratégico do material será feito pela Vision.</li>
               </ul>
             </div>
+              <br>
+              <h4 style="text-align: center;">Observação importante</h4>
+              <p style="text-align: center; margin-left: 60px; margin-right: 60px;">Esta análise foi elaborada com base nas informações públicas encontradas nas buscas do Google no momento da pesquisa. O objetivo é identificar oportunidades de melhoria e não representar uma auditoria completa da operação ou da experiência presencial das unidades.</p>
           </div>
         </section>
-
+        <br>
         <footer>
           Dashboard estratégico comercial — Vision • Tamo Junto Botequim
         </footer>
