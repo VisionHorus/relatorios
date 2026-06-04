@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Estratégico — Tamo Junto Botequim</title>
+  <style>
+    :root{
+      --bg:#e2e2e2;
+      --dark:#111827;
+      --dark2:#1f2937;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --text:#1f2937;
+      --amber:#FFAB00;
+      --amber2:#d97706;
+      --amberLight:#fef3c7;
+      --green:#10b981;
+      --greenLight:#d1fae5;
+      --red:#ef4444;
+      --redLight:#fee2e2;
+      --blue:#3b82f6;
+      --blueLight:#dbeafe;
+      --line:#e5e7eb;
+      --shadow:0 10px 28px rgba(17,24,39,.08);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{text-decoration:none;color:inherit}
+    .page{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+
+    aside{
+      position:sticky;top:0;height:100vh;
+      background:linear-gradient(180deg,#120804,#1f1208 55%,#111827);
+      color:white;padding:24px 18px;border-right:1px solid rgba(255,255,255,.08);
+      overflow:auto;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;margin-bottom:28px;
+      padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.12)
+    }
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--amber),#ffcf5a);
+      color:#120804;font-weight:900;font-size:1.1rem;
+      box-shadow:0 10px 22px rgba(245,158,11,.28)
+    }
+    .brand h1{font-size:1rem;line-height:1.15;letter-spacing:-.02em}
+    .brand span{color:rgba(255,255,255,.62);font-size:.78rem}
+
+    .menu{display:grid;gap:6px}
+    .menu a{
+      padding:11px 12px;border-radius:12px;color:rgba(255,255,255,.70);
+      font-size:.88rem;font-weight:700;transition:.22s ease;
+      display:flex;gap:10px;align-items:center;
+    }
+    .menu a:hover,.menu a.active{background:rgba(245,158,11,.16);color:#fff}
+
+    main{min-width:0}
+    .topbar{
+      position:sticky;top:0;z-index:20;
+      background:rgba(243,244,246,.82);backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(17,24,39,.08);
+      padding:16px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px
+    }
+    .topbar strong{color:var(--dark)}
+    .topbar .small{font-size:.84rem;color:var(--muted)}
+    .btn{
+      border:0;background:var(--dark);color:#fff;border-radius:12px;
+      padding:10px 14px;font-weight:800;cursor:pointer;transition:.22s ease;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+
+    .content{max-width:1180px;margin:0 auto;padding:26px}
+    .hero{
+      position:relative;overflow:hidden;border-radius:28px;
+      background:
+        radial-gradient(circle at 15% 10%,rgba(245,158,11,.36),transparent 40%),
+        linear-gradient(135deg,#1a0a00,#111827 52%,#111827);
+      color:#fff;padding:34px;box-shadow:var(--shadow);margin-bottom:22px;
+    }
+    .hero::after{
+      content:"";position:absolute;inset:0;
+      background-image:linear-gradient(120deg,rgba(255,255,255,.08) 0 1px,transparent 1px);
+      background-size:42px 42px;opacity:.18;pointer-events:none
+    }
+    .hero > *{position:relative;z-index:1}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--amber);color:#180c02;
+      font-size:.74rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase;
+      padding:7px 12px;border-radius:999px;margin-bottom:15px
+    }
+    .hero h2{font-size:clamp(2rem,5vw,4rem);letter-spacing:-.05em;line-height:.95;max-width:900px}
+    .hero h2 span{color:var(--amber)}
+    .hero p{margin-top:18px;max-width:760px;color:rgba(255,255,255,.78);font-size:1.08rem}
+    .hero-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .hero-meta span{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 12px;font-weight:700;font-size:.86rem}
+
+    section{margin:26px 0}
+    .section-title{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:16px}
+    .section-title h3{font-size:1.55rem;letter-spacing:-.035em;color:var(--dark)}
+    .section-title p{color:var(--muted);max-width:720px;margin-top:4px}
+    .grid{display:grid;gap:16px}
+    .grid-4{grid-template-columns:repeat(4,1fr)}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    .card{
+      background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+      padding:20px;box-shadow:var(--shadow);transition:.25s ease;position:relative;overflow:hidden
+    }
+    .card:hover{transform:translateY(-4px);box-shadow:0 18px 42px rgba(17,24,39,.12)}
+    .card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;}
+    .label{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--muted);margin-bottom:8px}
+    .metric{font-size:2.25rem;font-weight:950;letter-spacing:-.06em;color:var(--dark);line-height:1}
+    .metric.green{color:var(--green)}.metric.amber{color:var(--amber2)}.metric.red{color:var(--red)}.metric.blue{color:var(--blue)}
+    .sub{color:var(--muted);font-size:.9rem;margin-top:8px}
+    .card h4{font-size:1.02rem;color:var(--dark);margin-bottom:8px}
+    .card p,.card li{color:var(--muted);font-size:.94rem}
+    ul{list-style:none;display:grid;gap:9px}
+    li{position:relative;padding-left:22px}
+    li::before{content:"•";position:absolute;left:0;color:var(--amber);font-weight:950}
+
+    .alert{
+      display:flex;gap:12px;align-items:flex-start;border-radius:var(--radius);
+      padding:18px;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow)
+    }
+    .alert strong{color:var(--dark)}
+    .alert.red{background:linear-gradient(135deg,var(--redLight),#fff);border-left:5px solid var(--red)}
+    .alert.amber{background:linear-gradient(135deg,var(--amberLight),#fff);border-left:5px solid var(--amber)}
+    .alert.green{background:linear-gradient(135deg,var(--greenLight),#fff);border-left:5px solid var(--green)}
+    .iconBox{width:38px;height:38px;border-radius:14px;display:grid;place-items:center;flex:0 0 auto;background:rgba(0,0,0,.06);font-size:1.1rem}
+
+    .unit-card{padding:0;overflow:hidden}
+    .unit-head{color:#fff;padding:15px 18px;font-weight:900}
+    .unit-head.saude{background:linear-gradient(135deg,#10b981,#10b981)}
+    .unit-head.vale{background:linear-gradient(135deg,#f59e0b,#f59e0b)}
+    .unit-head.resgate{background:linear-gradient(135deg,#ef4444,#ef4444)}
+    .unit-body{padding:18px}
+    .row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:9px 0;font-size:.88rem}
+    .row:last-child{border-bottom:0}
+    .row span:first-child{color:var(--muted)}
+    .row span:last-child{text-align:right;font-weight:800;color:var(--dark)}
+    .tag{display:inline-flex;align-items:center;border-radius:999px;padding:4px 9px;font-size:.75rem;font-weight:900}
+    .ok{background:var(--greenLight);color:#065f46}.warn{background:var(--amberLight);color:#92400e}.bad{background:var(--redLight);color:#991b1b;}
+
+    .bar-chart{display:grid;gap:12px}
+    .bar-row{display:grid;grid-template-columns:150px 1fr 44px;gap:12px;align-items:center;font-size:.88rem}
+    .bar-track{height:11px;background:#eef2f7;border-radius:999px;overflow:hidden}
+    .bar{height:100%;border-radius:999px;background:var(--amber)}
+    .bar.green{background:var(--green)}.bar.red{background:var(--red)}.bar.blue{background:var(--blue)}
+    .donut-wrap{display:grid;grid-template-columns:170px 1fr;gap:18px;align-items:center}
+    .donut{
+      --p1:75;--p2:15;--p3:10;
+      width:160px;height:160px;border-radius:50%;
+      background:conic-gradient(var(--green) 0 calc(var(--p1)*1%),var(--amber) 0 calc((var(--p1) + var(--p2))*1%),var(--red) 0);
+      position:relative;margin:auto
+    }
+    .donut::after{content:"";position:absolute;inset:32px;background:#fff;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line)}
+    .donut-label{position:absolute;inset:0;display:grid;place-items:center;font-weight:950;color:var(--dark);z-index:1}
+    .legend{display:grid;gap:8px}
+    .legend span{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:.9rem}
+    .dot{width:10px;height:10px;border-radius:50%;display:inline-block}.dot.green{background:var(--green)}.dot.amber{background:var(--amber)}.dot.red{background:var(--red)}
+
+    .quote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .quote{
+      background:linear-gradient(135deg,#101623,#101623);
+      color:#fff;border-radius:18px;padding:18px;border-left:4px solid var(--amber);box-shadow:var(--shadow)
+    }
+    .quote p{font-style:italic;color:rgba(255,255,255,.92)}
+    .quote small{display:block;color:var(--amber);margin-top:10px;font-weight:800}
+
+    .swot{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .swot .card h4{padding-bottom:8px;border-bottom:2px solid;margin-bottom:12px}
+    .swot .forcas h4{color:var(--green);border-color:var(--green)}
+    .swot .fraquezas h4{color:var(--red);border-color:var(--red)}
+    .swot .oportunidades h4{color:var(--blue);border-color:var(--blue)}
+    .swot .riscos h4{color:var(--amber2);border-color:var(--amber)}
+
+    .rec{display:grid;gap:12px}
+    .rec-item{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
+    .num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--amber);color:#180c02;font-weight:950}
+    .priority{display:inline-flex;margin-left:8px;border-radius:999px;padding:3px 8px;font-size:.68rem;font-weight:950}
+    .priority.urgente{background:var(--redLight);color:#991b1b}.priority.alta{background:var(--amberLight);color:#92400e}.priority.media{background:var(--blueLight);color:#1d4ed8}
+
+    .price{
+      background:linear-gradient(135deg,#111827,#1f2937);
+      color:#fff;border-radius:24px;padding:24px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.1)
+    }
+    .price h4{font-size:1.2rem}
+    .price .big{font-size:2.4rem;font-weight:950;color:var(--amber);letter-spacing:-.06em;line-height:1;margin:12px 0}
+    .price p,.price li{color:rgba(255,255,255,.72)}
+    .notice{border-left:5px solid var(--amber);background:var(--amberLight);border-radius:16px;padding:16px;color:#78350f;font-weight:700}
+    footer{margin-top:32px;padding:28px;color:var(--muted);text-align:center}
+
+    .reveal{opacity:0;transform:translateY(14px);transition:.55s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:980px){
+      .page{grid-template-columns:1fr}
+      aside{position:relative;height:auto}
+      .menu{grid-template-columns:repeat(2,1fr)}
+      .topbar{position:relative}
+      .grid-4,.grid-3,.grid-2,.swot,.quote-grid{grid-template-columns:1fr}
+      .donut-wrap{grid-template-columns:1fr}
+      .bar-row{grid-template-columns:1fr}
+    }
+    @media print{
+      aside,.topbar{display:none}
+      .page{display:block}
+      body{background:white}
+      .content{padding:0}
+      .card,.alert,.rec-item,.price{box-shadow:none;break-inside:avoid}
+      .hero{break-inside:avoid}
+      section{break-inside:avoid}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <aside>
+      <div class="brand">
+        <div class="logo">V</div>
+        <div>
+          <h1>Dashboard Estratégico</h1>
+          <span>Tamo Junto Botequim</span>
+        </div>
+      </div>
+      <nav class="menu">
+        <a href="#visao" class="active">📊 Visão geral</a>
+        <a href="#unidades">📍 Unidades</a>
+        <a href="#ferida">🚨 Gargalos</a>
+        <a href="#sentimento">💬 Sentimentos</a>
+        <a href="#seo">🗺️ SEO local</a>
+        <a href="#marketing">💡 Marketing</a>
+        <a href="#swot">⚡ SWOT</a>
+        <a href="#proposta">💰 Proposta</a>
+      </nav>
+    </aside>
+
+    <main>
+      <div class="topbar">
+        <div>
+          <strong>Relatório + Proposta Comercial</strong>
+          <div class="small">Baseado no diagnóstico de reputação digital e posicionamento local</div>
+        </div>
+        <button class="btn" onclick="window.print()">Salvar como PDF</button>
+      </div>
+
+      <div class="content">
+        <section class="hero reveal" id="visao">
+          <div class="badge">Relatório estratégico 2026</div>
+          <h2>Presença digital, reputação e crescimento para o <span>Tamo Junto Botequim</span>.</h2>
+          <p>Um dashboard comercial direto para mostrar onde a marca está forte, onde perde oportunidade e como transformar Google, site, tráfego e conteúdo em mais visibilidade para as unidades.</p>
+          <div class="hero-meta">
+            <span>📍 Salvador, Bahia</span>
+            <span>🏢 3 unidades analisadas</span>
+            <span>⭐ 327+ avaliações consideradas</span>
+            <span>🚀 Alto potencial de marketing</span>
+          </div>
+        </section>
+
+        <section class="reveal">
+          <div class="section-title">
+            <div>
+              <h3>Scorecard executivo</h3>
+              <p>Resumo rápido da situação digital da marca, com foco em reputação, confiança, força competitiva e potencial de crescimento.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-4">
+            <div class="card">
+              <div class="label">Reputação geral</div>
+              <div class="metric amber">6.8</div>
+              <div class="sub">Saúde puxa a reputação; São Marcos e Resgate reduzem a média.</div>
+            </div>
+            <div class="card">
+              <div class="label">Autoridade local</div>
+              <div class="metric green">7.8</div>
+              <div class="sub">Marca forte no Largo da Saúde e participação no Comida di Buteco.</div>
+            </div>
+            <div class="card">
+              <div class="label">Força competitiva</div>
+              <div class="metric amber">6.2</div>
+              <div class="sub">Boa em uma unidade, vulnerável nas demais por falta de SEO local.</div>
+            </div>
+            <div class="card">
+              <div class="label">Potencial de marketing</div>
+              <div class="metric green">9.0</div>
+              <div class="sub">Identidade, caranguejo, música, promoções e experiência compartilhável.</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="unidades" class="reveal">
+          <div class="section-title">
+            <div>
+              <h3>Diagnóstico por unidade</h3>
+              <p>A marca não tem um problema único. Cada unidade está em um estágio diferente de presença, reputação e maturidade digital.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-3">
+            <div class="card unit-card">
+              <div class="unit-head saude">🟢 Saúde — Âncora da marca</div>
+              <div class="unit-body">
+                <div class="row"><span>Nota Google</span><span>4.6★</span></div>
+                <div class="row"><span>Avaliações</span><span>303</span></div>
+                <div class="row"><span>Perfil</span><span><span class="tag ok" style="color: green;">Reivindicado</span></span></div>
+                <div class="row"><span>Força</span><span>Tradição + Comida di Buteco</span></div>
+                <div class="row"><span>Gargalo</span><span>Banheiros / Erros na cobrança</span></div>
+              </div>
+            </div>
+
+            <div class="card unit-card">
+              <div class="unit-head vale">🟡 São Marcos — Em risco</div>
+              <div class="unit-body">
+                <div class="row"><span>Nota Google</span><span>3.4★</span></div>
+                <div class="row"><span>Avaliações</span><span>16</span></div>
+                <div class="row"><span>Perfil</span><span><span class="tag bad" style="color: #991b1b;">Não reivindicado</span></span></div>
+                <div class="row"><span>Risco</span><span>Desistência antes da visita</span></div>
+                <div class="row"><span>Gargalo</span><span>Atendimento / Gerência</span></div>
+              </div>
+            </div>
+
+            <div class="card unit-card">
+              <div class="unit-head resgate">🔴 Resgate — Perfil fantasma</div>
+              <div class="unit-body">
+                <div class="row"><span>Nota Google</span><span>3.6★</span></div>
+                <div class="row"><span>Avaliações</span><span>8</span></div>
+                <div class="row"><span>Perfil</span><span><span class="tag warn" style="color: var(--amber);">Pouco otimizado</span></span></div>
+                <div class="row"><span>Diferencial</span><span>Viveiro de caranguejo <i style="color:#8f97a7; font-weight: bold;">(Não aproveitado)</i></span></div>
+                <div class="row"><span>Gargalo</span><span>Banheiros precários</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="ferida" class="reveal">
+          <div class="section-title">
+            <div>
+              <h3>A ferida comercial</h3>
+              <p>O problema não é falta de marca. É perda de intenção de compra no momento em que o cliente decide onde vai sair.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-2">
+            <div class="alert red">
+              <div class="iconBox">🚨</div>
+              <div>
+                <strong>O cliente pesquisa antes de ir.</strong>
+                <p>Ele olha nota, rota, fotos, Instagram, cardápio, avaliações e agora também pergunta para ferramentas de IA onde comer, beber ou assistir jogo. Quando os sinais digitais são fracos, a escolha vai para quem aparece melhor.</p>
+              </div>
+            </div>
+            <div class="alert amber">
+              <div class="iconBox">⚠️</div>
+              <div>
+                <strong>A marca fica forte no presencial, mas vulnerável no digital.</strong>
+                <p>A Saúde prova que o Tamo Junto tem potencial. O risco está na fragmentação: uma unidade forte, uma unidade mal reivindicada e outra sem a força necessária no Google.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="sentimento" class="reveal">
+          <div class="section-title">
+            <div>
+              <h3>Análise visual das avaliações</h3>
+              <p>O dashboard mostra de forma simples o peso dos elogios, reclamações e sinais emocionais que devem orientar campanhas e correções.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-2">
+            <div class="card">
+              <h4>Comparativo de notas</h4>
+              <div class="bar-chart">
+                <div class="bar-row"><span>Saúde</span><div class="bar-track"><div class="bar green" style="width:92%"></div></div><strong>4.6</strong></div>
+                <div class="bar-row"><span>São Marcos</span><div class="bar-track"><div class="bar" style="width:68%"></div></div><strong>3.4</strong></div>
+                <div class="bar-row"><span>Resgate</span><div class="bar-track"><div class="bar red" style="width:72%"></div></div><strong>3.6</strong></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h4>Volume de avaliações</h4>
+              <div class="bar-chart">
+                <div class="bar-row"><span>Saúde</span><div class="bar-track"><div class="bar green" style="width:100%"></div></div><strong>303</strong></div>
+                <div class="bar-row"><span>São Marcos</span><div class="bar-track"><div class="bar" style="width:5.3%"></div></div><strong>16</strong></div>
+                <div class="bar-row"><span>Resgate</span><div class="bar-track"><div class="bar red" style="width:2.6%"></div></div><strong>8</strong></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h4>Sentimento estimado — Saúde</h4>
+              <div class="donut-wrap">
+                <div class="donut" style="--p1:75;--p2:15;--p3:10"><div class="donut-label">75%</div></div>
+                <div class="legend">
+                  <span><i class="dot green"></i> Positivas — cerveja gelada, comida e ambiente.</span>
+                  <span><i class="dot amber"></i> Mistas — serviço variável.</span>
+                  <span><i class="dot red"></i> Negativas — banheiro, espera e som.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h4>Sentimento estimado — São Marcos</h4>
+              <div class="donut-wrap">
+                <div class="donut" style="--p1:25;--p2:12;--p3:63"><div class="donut-label">63%</div></div>
+                <div class="legend">
+                  <span><i class="dot red"></i> Negativas — atendimento, gerência e couvert.</span>
+                  <span><i class="dot amber"></i> Mistas — ambiente com ressalvas.</span>
+                  <span><i class="dot green"></i> Positivas — cerveja e promoções.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="seo" class="reveal">
+          <div class="section-title">
+            <div>
+              <h3>SEO local e pesquisa por IA</h3>
+              <p>Hoje o cliente não pergunta apenas “qual o Instagram?”. Ele pesquisa por intenção: onde ir, perto de mim, com música, com caranguejo, para jogo ou São João.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-2">
+            <div class="card">
+              <h4>Exemplos de buscas que importam</h4>
+              <ul>
+                <li>“Bar no Resgate para comer caranguejo.”</li>
+                <li>“Melhor botequim para assistir jogo em Salvador.”</li>
+                <li>“Bar com música ao vivo e cerveja gelada perto de mim.”</li>
+                <li>“Onde ir no São João em Salvador com amigos.”</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>O que Google e IA procuram</h4>
+              <ul>
+                <li>Perfil Google completo e atualizado.</li>
+                <li>Site com informações consistentes.</li>
+                <li>Avaliações respondidas e fotos recentes.</li>
+                <li>Conteúdo alinhado com as buscas do público.</li>
+                <li>Autoridade digital e consistência entre canais.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="marketing" class="reveal">
+          <div class="section-title">
+            <div>
+              <h3>Marketing indireto: a voz do cliente</h3>
+              <p>As melhores campanhas podem nascer das próprias frases dos clientes, porque elas carregam linguagem real, emoção e prova social.</p>
+            </div>
+          </div>
+
+          <div class="quote-grid">
+            <div class="quote"><p>“Aprenda a butecar!”</p><small>Potencial de slogan de campanha</small></div>
+            <div class="quote"><p>“Cerveja geladíssima e tira-gosto top.”</p><small>Atributo sensorial para anúncios</small></div>
+            <div class="quote"><p>“O arrocha da sofrência, samba de primeira.”</p><small>Linguagem autêntica baiana</small></div>
+            <div class="quote"><p>“Um fervo em Salvador, local com gente bonita.”</p><small>Apelo social para Meta Ads</small></div>
+            <div class="quote"><p>“O bumerangue deles é divino.”</p><small>Destaque de produto específico</small></div>
+            <div class="quote"><p>“Próximo a tudo. Simplesmente vão!”</p><small>Call-to-action orgânico</small></div>
+          </div>
+        </section>
+
+        <section id="swot" class="reveal">
+          <div class="section-title">
+            <div>
+              <h3>SWOT estratégico</h3>
+              <p>Forças, fraquezas, oportunidades e riscos organizados para orientar a proposta de implantação.</p>
+            </div>
+          </div>
+
+          <div class="swot">
+            <div class="card forcas">
+              <h4>Forças</h4>
+              <ul>
+                <li>Marca consolidada desde 2018.</li>
+                <li>Culinária elogiada: espetinhos, farofa, caranguejo.</li>
+                <li>Cerveja gelada como atributo recorrente.</li>
+                <li>Música ao vivo e identidade de botequim.</li>
+                <li>Participação no Comida di Buteco 2025.</li>
+              </ul>
+            </div>
+            <div class="card fraquezas">
+              <h4>Fraquezas</h4>
+              <ul>
+                <li>Presença digital fragmentada entre unidades.</li>
+                <li>São Marcos com nota baixa e perfil não reivindicado.</li>
+                <li>Resgate com pouca força e baixa prova social.</li>
+                <li>Atendimento e gerência aparecem como pontos de atrito.</li>
+                <li>Reclamações não respondidas prejudicam confiança.</li>
+              </ul>
+            </div>
+            <div class="card oportunidades">
+              <h4>Oportunidades</h4>
+              <ul>
+                <li>Otimizar Google Business das unidades.</li>
+                <li>Usar site para fortalecer SEO e campanhas.</li>
+                <li>Explorar caranguejo e música em campanhas.</li>
+                <li>Ativar Copa, São João, jogos e datas fortes.</li>
+                <li>Responder avaliações e recuperar percepção.</li>
+              </ul>
+            </div>
+            <div class="card riscos">
+              <h4>Riscos</h4>
+              <ul>
+                <li>Concorrentes ocuparem o espaço nas buscas locais.</li>
+                <li>Cliente desistir antes da visita pela nota baixa.</li>
+                <li>Uma unidade ruim contaminar a percepção da marca inteira.</li>
+                <li>Dependência excessiva do Instagram.</li>
+                <li>Perda de tráfego orgânico e recomendação por IA.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="reveal">
+          <div class="section-title">
+            <div>
+              <h3>Recomendações prioritárias</h3>
+              <p>Ações que conectam o diagnóstico à estratégia comercial oferecida.</p>
+            </div>
+          </div>
+
+          <div class="rec">
+            <div class="rec-item"><div class="num">1</div><div><h4>Otimizar Google Business das unidades <span class="priority urgente">URGENTE</span></h4><p>Corrigir informações, categorias, descrição, fotos, links, rotas e resposta às avaliações.</p></div></div>
+            <div class="rec-item"><div class="num">2</div><div><h4>Construir site profissional <span class="priority alta">ALTA</span></h4><p>Base própria para SEO, autoridade, campanhas, rastreamento, credibilidade e pesquisas por IA.</p></div></div>
+            <div class="rec-item"><div class="num">3</div><div><h4>Gestão de tráfego por unidade <span class="priority alta">ALTA</span></h4><p>Campanhas locais, impulsionamentos e estratégia por eventos, promoções, público e localização.</p></div></div>
+            <div class="rec-item"><div class="num">4</div><div><h4>Conteúdo real em conjunto <span class="priority media">MÉDIA</span></h4><p>A equipe Vision orienta ideias, campanha e uso do material. A captação dos vídeos fica com a equipe/proprietários do bar.</p></div></div>
+          </div>
+        </section>
+
+        <section class="reveal">
+          <div class="section-title">
+            <div>
+              <h3>Próximos passos</h3>
+              <p>Fluxo simples para começar sem travar a operação do bar.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-2">
+            <div class="card">
+              <h4>Implementação</h4>
+              <ul>
+                <li>Aprovação da proposta.</li>
+                <li>Alinhamento com proprietários ou equipe responsável.</li>
+                <li>Coleta de acessos, informações e materiais.</li>
+                <li>Estruturação do site e Google Business.</li>
+                <li>Planejamento das primeiras campanhas.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Condições comerciais</h4>
+              <ul>
+                <li>Pagamento via PIX, cartão ou parcelamento semanal quando houver tráfego mensal incluso.</li>
+                <li>Verba de anúncios não inclusa na gestão.</li>
+                <li>Captação de vídeos fica sob responsabilidade da equipe/proprietários do bar.</li>
+                <li>Uso estratégico do material será feito pela Vision.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <footer>
+          Dashboard estratégico comercial — Vision • Tamo Junto Botequim
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    },{threshold:.12});
+    reveals.forEach(el=>obs.observe(el));
+
+    const links = document.querySelectorAll('.menu a');
+    links.forEach(link=>{
+      link.addEventListener('click',()=>{
+        links.forEach(l=>l.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
