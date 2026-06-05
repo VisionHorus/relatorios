@@ -4,273 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard Estratégico — Tamo Junto Botequim</title>
-  <style>
-    :root{
-      --bg:#e2e2e2;
-      --dark:#111827;
-      --dark2:#1f2937;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --text:#1f2937;
-      --amber:#FFAB00;
-      --amber2:#d97706;
-      --amberLight:#fef3c7;
-      --green:#10b981;
-      --greenLight:#d1fae5;
-      --red:#ef4444;
-      --redLight:#fee2e2;
-      --blue:#3b82f6;
-      --blueLight:#dbeafe;
-      --line:#e5e7eb;
-      --shadow:0 10px 28px rgba(17,24,39,.08);
-      --radius:18px;
-    }
-
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:"poppins",system-ui,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.3;
-    }
-    a{text-decoration:none;color:inherit}
-    .page{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
-
-    aside{
-      position:sticky;top:0;height:100vh;
-      background:linear-gradient(180deg,#120804,#1f1208 55%,#111827);
-      color:white;padding:24px 18px;border-right:1px solid rgba(255,255,255,.08);
-      overflow:auto;
-    }
-    .brand{
-      display:flex;align-items:center;gap:12px;margin-bottom:28px;
-      padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.12)
-    }
-    .logo{
-      width:44px;height:44px;border-radius:14px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg,var(--amber),#ffcf5a);
-      color:#120804;font-weight:900;font-size:1.1rem;
-      box-shadow:0 10px 22px rgba(245,158,11,.28)
-    }
-    .brand h1{font-size:1rem;line-height:1.15;letter-spacing:-.02em}
-    .brand span{color:rgba(255,255,255,.62);font-size:.78rem}
-
-    .menu{display:grid;gap:6px}
-    .menu a{
-      padding:11px 12px;border-radius:12px;color:rgba(255,255,255,.70);
-      font-size:.88rem;font-weight:700;transition:.22s ease;
-      display:flex;gap:10px;align-items:center;
-    }
-    .menu a:hover,.menu a.active{background:rgba(245,158,11,.16);color:#fff}
-
-    main{min-width:0}
-    .topbar{
-      position:sticky;top:0;z-index:20;
-      background:rgba(243,244,246,.82);backdrop-filter:blur(14px);
-      border-bottom:1px solid rgba(17,24,39,.08);
-      padding:16px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px
-    }
-    .topbar strong{color:var(--dark)}
-    .topbar .small{font-size:.84rem;color:var(--muted)}
-    .btn{
-      border:0;background:var(--dark);color:#fff;border-radius:12px;
-      padding:10px 14px;font-weight:800;cursor:pointer;transition:.22s ease;
-    }
-    .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-
-    .content{max-width:1180px;margin:0 auto;padding:26px}
-    .hero{
-      position:relative;overflow:hidden;border-radius:28px;
-      background:
-        radial-gradient(circle at 15% 10%,rgba(245,158,11,.36),transparent 40%),
-        linear-gradient(135deg,#1a0a00,#111827 52%,#111827);
-      color:#fff;padding:34px;box-shadow:var(--shadow);margin-bottom:22px;
-    }
-    .hero::after{
-      content:"";position:absolute;inset:0;
-      background-image:linear-gradient(120deg,rgba(255,255,255,.08) 0 1px,transparent 1px);
-      background-size:42px 42px;opacity:.18;pointer-events:none
-    }
-    .hero > *{position:relative;z-index:1}
-    .badge{
-      display:inline-flex;align-items:center;gap:8px;
-      background:var(--amber);color:#180c02;
-      font-size:.74rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase;
-      padding:7px 12px;border-radius:999px;margin-bottom:15px
-    }
-    .hero h2{font-size:clamp(2rem,4vw,4rem);letter-spacing:-.05em;line-height:.95;max-width:900px}
-    .hero h2 span{color:var(--amber)}
-    .hero p{margin-top:18px;max-width:760px;color:rgba(255,255,255,.78);font-size:1.08rem}
-    .hero-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-    .hero-meta span{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 12px;font-weight:700;font-size:.86rem}
-
-    section{margin:26px 0}
-    .section-title{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:16px}
-    .section-title h3{font-size:1.55rem;letter-spacing:-.035em;color:var(--dark)}
-    .section-title p{color:var(--muted);max-width:720px;margin-top:4px}
-    .grid{display:grid;gap:16px}
-    .grid-4{grid-template-columns:repeat(4,1fr)}
-    .grid-3{grid-template-columns:repeat(3,1fr)}
-    .grid-2{grid-template-columns:repeat(2,1fr)}
-    .card{
-      background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-      padding:20px;box-shadow:var(--shadow);transition:.25s ease;position:relative;overflow:hidden
-    }
-    .card:hover{transform:translateY(-4px);box-shadow:0 18px 42px rgba(17,24,39,.12)}
-    .card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;}
-    .label{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--muted);margin-bottom:8px}
-    .metric{font-size:2.25rem;font-weight:950;letter-spacing:-.06em;color:var(--dark);line-height:1}
-    .metric.green{color:var(--green)}.metric.amber{color:var(--amber2)}.metric.red{color:var(--red)}.metric.blue{color:var(--blue)}
-    .sub{color:var(--muted);font-size:.9rem;margin-top:8px}
-    .card h4{font-size:1.02rem;color:var(--dark);margin-bottom:8px}
-    .card p,.card li{color:var(--muted);font-size:.94rem}
-    ul{list-style:none;display:grid;gap:9px}
-    li{position:relative;padding-left:22px}
-    li::before{content:"•";position:absolute;left:0;color:var(--amber);font-weight:950}
-
-    .alert{
-      display:flex;gap:12px;align-items:flex-start;border-radius:var(--radius);
-      padding:18px;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow)
-    }
-    .alert strong{color:var(--dark)}
-    .alert.red{background:linear-gradient(135deg,var(--redLight),#fff);border-left:5px solid var(--red)}
-    .alert.amber{background:linear-gradient(135deg,var(--amberLight),#fff);border-left:5px solid var(--amber)}
-    .alert.green{background:linear-gradient(135deg,var(--greenLight),#fff);border-left:5px solid var(--green)}
-    .iconBox{width:38px;height:38px;border-radius:14px;display:grid;place-items:center;flex:0 0 auto;background:rgba(0,0,0,.06);font-size:1.1rem}
-
-    .unit-card{padding:0;overflow:hidden}
-    .unit-head{color:#fff;padding:15px 18px;font-weight:900}
-    .unit-head.saude{background:linear-gradient(135deg,#10b981,#10b981)}
-    .unit-head.vale{background:linear-gradient(135deg,#f59e0b,#f59e0b)}
-    .unit-head.resgate{background:linear-gradient(135deg,#ef4444,#ef4444)}
-    .unit-body{padding:18px}
-    .row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:9px 0;font-size:.88rem}
-    .row:last-child{border-bottom:0}
-    .row span:first-child{color:var(--muted)}
-    .row span:last-child{text-align:right;font-weight:800;color:var(--dark)}
-    .tag{display:inline-flex;align-items:center;border-radius:999px;padding:4px 9px;font-size:.75rem;font-weight:900}
-    .ok{background:var(--greenLight);color:#065f46}.warn{background:var(--amberLight);color:#92400e}.bad{background:var(--redLight);color:#991b1b;}
-
-    .bar-chart{display:grid;gap:12px}
-    .bar-row{display:grid;grid-template-columns:150px 1fr 44px;gap:12px;align-items:center;font-size:.88rem}
-    .bar-track{height:11px;background:#eef2f7;border-radius:999px;overflow:hidden}
-    .bar{height:100%;border-radius:999px;background:var(--amber)}
-    .bar.green{background:var(--green)}.bar.red{background:var(--red)}.bar.blue{background:var(--blue)}
-    .donut-wrap{display:grid;grid-template-columns:170px 1fr;gap:18px;align-items:center}
-    .donut{
-      --p1:75;--p2:15;--p3:10;
-      width:160px;height:160px;border-radius:50%;
-      background:conic-gradient(var(--green) 0 calc(var(--p1)*1%),var(--amber) 0 calc((var(--p1) + var(--p2))*1%),var(--red) 0);
-      position:relative;margin:auto
-    }
-    .donut::after{content:"";position:absolute;inset:32px;background:#fff;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line)}
-    .donut-label{position:absolute;inset:0;display:grid;place-items:center;font-weight:950;color:var(--dark);z-index:1}
-    .legend{display:grid;gap:8px}
-    .legend span{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:.9rem}
-    .dot{width:10px;height:10px;border-radius:50%;display:inline-block}.dot.green{background:var(--green)}.dot.amber{background:var(--amber)}.dot.red{background:var(--red)}
-
-    .quote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .quote{
-      background:linear-gradient(135deg,#101623,#101623);
-      color:#fff;border-radius:18px;padding:18px;border-left:4px solid var(--amber);box-shadow:var(--shadow)
-    }
-    .quote p{font-style:italic;color:rgba(255,255,255,.92)}
-    .quote small{display:block;color:var(--amber);margin-top:10px;font-weight:800}
-
-    .swot{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-    .swot .card h4{padding-bottom:8px;border-bottom:2px solid;margin-bottom:12px}
-    .swot .forcas h4{color:var(--green);border-color:var(--green)}
-    .swot .fraquezas h4{color:var(--red);border-color:var(--red)}
-    .swot .oportunidades h4{color:var(--blue);border-color:var(--blue)}
-    .swot .riscos h4{color:var(--amber2);border-color:var(--amber)}
-
-    .rec{display:grid;gap:12px}
-    .rec-item{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
-    .num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--amber);color:#180c02;font-weight:950}
-    .priority{display:inline-flex;margin-left:8px;border-radius:999px;padding:3px 8px;font-size:.68rem;font-weight:950}
-    .priority.urgente{background:var(--redLight);color:#991b1b}.priority.alta{background:var(--amberLight);color:#92400e}.priority.media{background:var(--blueLight);color:#1d4ed8}
-
-    .price{
-      background:linear-gradient(135deg,#111827,#1f2937);
-      color:#fff;border-radius:24px;padding:24px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.1)
-    }
-    .price h4{font-size:1.2rem}
-    .price .big{font-size:2.4rem;font-weight:950;color:var(--amber);letter-spacing:-.06em;line-height:1;margin:12px 0}
-    .price p,.price li{color:rgba(255,255,255,.72)}
-    .notice{border-left:5px solid var(--amber);background:var(--amberLight);border-radius:16px;padding:16px;color:#78350f;font-weight:700}
-    footer{margin-top:32px;padding:28px;color:var(--muted);text-align:center}
-
-    .reveal{opacity:0;transform:translateY(14px);transition:.55s ease}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-
-    @media(max-width:980px){
-      .page{grid-template-columns:1fr}
-      aside{position:relative;height:auto}
-      .menu{grid-template-columns:repeat(2,1fr)}
-      .topbar{position:relative}
-      .grid-4,.grid-3,.grid-2,.swot,.quote-grid{grid-template-columns:1fr}
-      .donut-wrap{grid-template-columns:1fr}
-      .bar-row{grid-template-columns:1fr}
-    }
-    @media print{
-      aside,.topbar{display:none}
-      .page{display:block}
-      body{background:white}
-      .content{padding:0}
-      .card,.alert,.rec-item,.price{box-shadow:none;break-inside:avoid}
-      .hero{break-inside:avoid}
-      section{break-inside:avoid}
-    }
-    .final-cta{
-    text-align:center;
-    padding:40px 20px;
-    margin:40px;
-    border:3px solid var(--dark2);
-    border-radius:24px;
-    }
-
-    .final-cta h3{
-        margin-bottom:10px;
-        font-size:1.6rem;
-    }
-
-    .final-cta p{
-        color:var(--muted);
-        margin-bottom:20px;
-    }
-  </style>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <div class="page">
     <aside>
       <div class="brand">
-        <div class="logo">V</div>
+      <img src="./assets/Logo.png" style="width: 30px;" alt="Logo">
         <div>
-          <h1>Dashboard Estratégico</h1>
+          <h1 style="font-size: 14px;">Dashboard Estratégico</h1>
           <span>Tamo Junto Botequim</span>
         </div>
       </div>
       <nav class="menu">
-        <a href="#visao" class="active">📊 Visão geral</a>
-        <a href="#unidades">📍 Unidades</a>
-        <a href="#ferida">🚨 Gargalos</a>
-        <a href="#sentimento">💬 Sentimentos</a>
-        <a href="#seo">🗺️ SEO local</a>
-        <a href="#marketing">💡 Marketing</a>
-        <a href="#swot">⚡ SWOT</a>
-        <a href="#proposta">💰 Proposta</a>
+          <a href="#visao" class="active">📊 Resumo</a>
+          <a href="#unidades">📍 Unidades</a>
+          <a href="#ferida">🚨 Melhorias</a>
+          <a href="#sentimento">💬 Clientes</a>
+          <a href="#seo">🗺️ Presença no Google</a>
+          <a href="#marketing">💡 Marketing</a>
+          <a href="#swot">⚡ Diagnóstico</a>
+          <a href="#recomend">➡️ proximos passos</a>
       </nav>
     </aside>
 
+    <button class="menu-toggle">☰ Menu</button>
+
     <main>
       <div class="topbar">
+        <button class="btn" onclick="window.print()">Salvar como PDF</button>
         <div>
           <strong>Relatório</strong>
           <div class="small">Baseado no diagnóstico de reputação digital e posicionamento local</div>
         </div>
-        <button class="btn" onclick="window.print()">Salvar como PDF</button>
       </div>
 
       <div class="content">
@@ -313,190 +79,200 @@
             <div class="card">
               <div class="label">Potencial para atrair mais clientes</div>
               <div class="metric green">9.0</div>
-              <div class="sub">Identidade, caranguejo, música, promoções e experiência compartilhável.</div>
+              <div class="sub">Identidade, caranguejo e música ao vivo são diferenciais fortes.</div>
             </div>
           </div>
         </section>
-          <br>
+
         <section id="unidades" class="reveal">
           <div class="section-title">
             <div>
-              <h3>Como cada unidade aparece para quem pesquisa no Google</h3>
-              <p>Embora todas façam parte da mesma marca, cada unidade transmite uma impressão diferente para quem pesquisa antes de decidir onde ir.</p>
+              <h3>Análise por Unidade</h3>
+              <p>Cada unidade tem um perfil diferente. Veja os pontos fortes e as oportunidades de cada uma.</p>
             </div>
           </div>
-
           <div class="grid grid-3">
             <div class="card unit-card">
-              <div class="unit-head saude">🟢 Saúde — Âncora da marca</div>
+              <div class="unit-head saude">🟢 Unidade Saúde — Âncora da Marca</div>
               <div class="unit-body">
-                <div class="row"><span>Nota Google</span><span>4.6★</span></div>
-                <div class="row"><span>Avaliações</span><span>303</span></div>
-                <div class="row"><span>Perfil</span><span><span class="tag ok" style="color: green;">Reivindicado</span></span></div>
-                <div class="row"><span>Força</span><span>Tradição + Comida di Buteco</span></div>
-                <div class="row"><span>Gargalo</span><span>Banheiros / Erros na cobrança</span></div>
+                <div class="row"><span>Nota Google</span><span>4.6 ⭐ (303 avaliações)</span></div>
+                <div class="row"><span>Endereço</span><span>Largo da Saúde, 02</span></div>
+                <div class="row"><span>Horário</span><span>Ter–Dom 17h às 00h</span></div>
+                <div class="row"><span>Música ao Vivo</span><span>Qui a Dom</span></div>
+                <div class="row"><span>Perfil Google</span><span><span class="tag ok">✓ Reivindicado</span></span></div>
+                <div class="row"><span>Website</span><span><span class="tag ok">✓ Vinculado</span></span></div>
               </div>
             </div>
-
             <div class="card unit-card">
-              <div class="unit-head vale">🟡 São Marcos — Em risco</div>
+              <div class="unit-head vale">🟡 Unidade São Marcos (II) — Em Risco</div>
               <div class="unit-body">
-                <div class="row"><span>Nota Google</span><span>3.4★</span></div>
-                <div class="row"><span>Avaliações</span><span>16</span></div>
-                <div class="row"><span>Perfil</span><span><span class="tag bad" style="color: #991b1b;">Não reivindicado</span></span></div>
-                <div class="row"><span>Risco</span><span>Desistência antes da visita</span></div>
-                <div class="row"><span>Gargalo</span><span>Atendimento / Gerência</span></div>
+                <div class="row"><span>Nota Google</span><span>3.4 ⭐ (16 avaliações)</span></div>
+                <div class="row"><span>Endereço</span><span>R. Mata Atlântica I, 180</span></div>
+                <div class="row"><span>Horário</span><span>Seg, Qua–Dom 16h às 01h</span></div>
+                <div class="row"><span>Promoção</span><span>Caranguejo + Chopp dobrado</span></div>
+                <div class="row"><span>Perfil Google</span><span><span class="tag bad">✗ Não reivindicado</span></span></div>
+                <div class="row"><span>Website</span><span><span class="tag bad">✗ Não vinculado</span></span></div>
               </div>
             </div>
-
             <div class="card unit-card">
-              <div class="unit-head resgate">🔴 Resgate — Perfil fantasma</div>
+              <div class="unit-head resgate">🔴 Unidade Resgate (III) — "Perfil Fantasma"</div>
               <div class="unit-body">
-                <div class="row"><span>Nota Google</span><span>3.6★</span></div>
-                <div class="row"><span>Avaliações</span><span>8</span></div>
-                <div class="row"><span>Perfil</span><span><span class="tag bad" style="color: #991b1b;">Não reivindicado</span></span></div>
-                <div class="row"><span>Diferencial</span><span>Viveiro de caranguejo <i style="color:#8f97a7; font-weight: bold;">(Não aproveitado)</i></span></div>
-                <div class="row"><span>Gargalo</span><span>Banheiros precários</span></div>
+                <div class="row"><span>Nota Google</span><span>3.6 ⭐ (8 avaliações)</span></div>
+                <div class="row"><span>Endereço</span><span>Rua Andaraí, 723 — Resgate</span></div>
+                <div class="row"><span>Inauguração</span><span>Jul/Ago 2025</span></div>
+                <div class="row"><span>Horário</span><span>Ter–Sáb 16h às 00h | Dom 11h–22h</span></div>
+                <div class="row"><span>Diferencial</span><span><span class="tag ok">✓ Viveiro de Caranguejo</span></span></div>
+                <div class="row"><span>Gargalo Principal</span><span><span class="tag bad">✗ Banheiros Precários</span></span></div>
               </div>
             </div>
           </div>
         </section>
-        <br>
+
         <section id="ferida" class="reveal">
           <div class="section-title">
             <div>
-              <h3>Onde clientes podem estar sendo perdidos</h3>
-              <p>O Tamo Junto já possui reconhecimento e uma base sólida de clientes. O desafio está em como algumas unidades aparecem para quem está pesquisando opções no Google antes de sair de casa.</p>
+              <h3>Pontos que Precisam de Atenção</h3>
+              <p>Problemas recorrentes que reduzem a confiança e afastam clientes potenciais.</p>
             </div>
           </div>
-
           <div class="grid grid-2">
             <div class="alert red">
-              <div class="iconBox">🚨</div>
+              <div class="iconBox">⚠️</div>
               <div>
-                <strong>O cliente pesquisa antes de ir.</strong>
-                <p>Ele olha nota, rota, fotos, Instagram, cardápio, avaliações e agora também pergunta para ferramentas de IA onde comer, beber ou assistir jogo. Quando os sinais digitais são fracos, a escolha vai para quem aparece melhor.</p>
+                <strong>Atendimento Inconsistente</strong>
+                <p>Mencionado em múltiplas avaliações negativas. Garçons atentos em alguns dias, negligentes em outros.</p>
+              </div>
+            </div>
+            <div class="alert red">
+              <div class="iconBox">⚠️</div>
+              <div>
+                <strong>Gerência com Postura Inadequada</strong>
+                <p>Especialmente na unidade São Marcos, comportamentos que afastam clientes.</p>
               </div>
             </div>
             <div class="alert amber">
               <div class="iconBox">⚠️</div>
               <div>
-                <strong>A marca fica forte no presencial, mas vulnerável no digital.</strong>
-                <p>A Saúde prova que o Tamo Junto tem potencial. O risco está na fragmentação: uma unidade forte, uma unidade mal reivindicada e outra sem a força necessária no Google.</p>
+                <strong>Banheiros Precários</strong>
+                <p>Ponto crítico recorrente, especialmente no Resgate. Afeta percepção de higiene.</p>
+              </div>
+            </div>
+            <div class="alert amber">
+              <div class="iconBox">⚠️</div>
+              <div>
+                <strong>Perfis do Google Fragmentados</strong>
+                <p>São Marcos não reivindicado; Resgate com múltiplos perfis. Invisibilidade nas buscas.</p>
               </div>
             </div>
           </div>
         </section>
-        <br>
 
         <section id="sentimento" class="reveal">
           <div class="section-title">
             <div>
-              <h3>Análise visual das avaliações</h3>
-              <p>O dashboard mostra de forma simples o peso dos elogios, reclamações e sinais emocionais que devem orientar campanhas e correções.</p>
+              <h3>O Que os Clientes Dizem</h3>
+              <p>Análise emocional das avaliações para entender o que realmente importa.</p>
             </div>
           </div>
-
-          <div class="grid grid-2">
-            <div class="card">
-              <h4>Comparativo de notas</h4>
-              <div class="bar-chart">
-                <div class="bar-row"><span>Saúde</span><div class="bar-track"><div class="bar green" style="width:92%"></div></div><strong>4.6</strong></div>
-                <div class="bar-row"><span>São Marcos</span><div class="bar-track"><div class="bar" style="width:68%"></div></div><strong>3.4</strong></div>
-                <div class="bar-row"><span>Resgate</span><div class="bar-track"><div class="bar red" style="width:72%"></div></div><strong>3.6</strong></div>
-              </div>
+          <div class="quote-grid">
+            <div class="quote">
+              <p>"O lugar é simplesmente MARAVILHOSO! O bumerangue deles divino, o preço é justo e a cerveja gelada."</p>
+              <small>⭐⭐⭐⭐⭐ Cliente satisfeito</small>
             </div>
-
-            <div class="card">
-              <h4>Volume de avaliações</h4>
-              <div class="bar-chart">
-                <div class="bar-row"><span>Saúde</span><div class="bar-track"><div class="bar green" style="width:100%"></div></div><strong>303</strong></div>
-                <div class="bar-row"><span>São Marcos</span><div class="bar-track"><div class="bar" style="width:5.3%"></div></div><strong>16</strong></div>
-                <div class="bar-row"><span>Resgate</span><div class="bar-track"><div class="bar red" style="width:2.6%"></div></div><strong>8</strong></div>
-              </div>
+            <div class="quote">
+              <p>"Atendimento HORRÍVEL, PÉSSIMO, RUIM, UMA NEGAÇÃO. Cheguei às 22:10 e fiz o pedido. Somente às 22:50 informaram que o espeto tinha acabado."</p>
+              <small>⭐ Cliente insatisfeito</small>
             </div>
-
-            <div class="card">
-              <h4>Sentimento estimado — Saúde</h4>
-              <div class="donut-wrap">
-                <div class="donut" style="--p1:75;--p2:15;--p3:10"><div class="donut-label">75%</div></div>
-                <div class="legend">
-                  <span><i class="dot green"></i> Positivas — cerveja gelada, comida e ambiente.</span>
-                  <span><i class="dot amber"></i> Mistas — serviço variável.</span>
-                  <span><i class="dot red"></i> Negativas — banheiro, espera e som.</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <h4>Sentimento estimado — São Marcos</h4>
-              <div class="donut-wrap">
-                <div class="donut" style="--p1:25;--p2:12;--p3:63"><div class="donut-label">63%</div></div>
-                <div class="legend">
-                  <span><i class="dot red"></i> Negativas — atendimento, gerência e couvert.</span>
-                  <span><i class="dot amber"></i> Mistas — ambiente com ressalvas.</span>
-                  <span><i class="dot green"></i> Positivas — cerveja e promoções.</span>
-                </div>
-              </div>
+            <div class="quote">
+              <p>"O atendimento é excelente, os garçons são atenciosos, mas o gerente é egocêntrico. Colocando música ao vivo no meio do jogo."</p>
+              <small>⭐⭐⭐ Cliente misto</small>
             </div>
           </div>
         </section>
-        <br>
 
         <section id="seo" class="reveal">
           <div class="section-title">
             <div>
-              <h3>Como as pessoas procuram lugares como o seu</h3>
-                <br>
-              <p>Hoje a decisão de onde comer ou assistir um jogo normalmente começa com uma pesquisa no Google. Muitas pessoas também utilizam ferramentas de inteligência artificial para pedir recomendações.
-                <br>
-                <br>
-                Quando as informações estão completas, atualizadas e bem avaliadas, as chances de escolha aumentam.</p>
+              <h3>Presença no Google</h3>
+              <p>Como o Tamo Junto aparece (ou não) nas buscas locais.</p>
             </div>
           </div>
-
           <div class="grid grid-2">
             <div class="card">
-              <h4>Exemplos de buscas que importam</h4>
+              <h4>✓ Saúde — Forte</h4>
               <ul>
-                <li>“Bar no Resgate para comer caranguejo.”</li>
-                <li>“Melhor botequim para assistir jogo em Salvador.”</li>
-                <li>“Bar com música ao vivo e cerveja gelada perto de mim.”</li>
-                <li>“Onde ir no São João em Salvador com amigos.”</li>
+                <li>303 avaliações com nota 4.6</li>
+                <li>Perfil completo e reivindicado</li>
+                <li>Website vinculado</li>
+                <li>Aparece nas primeiras posições para "bar Largo da Saúde"</li>
+                <li>Participação no Comida di Buteco 2025</li>
               </ul>
             </div>
             <div class="card">
-              <h4>O que ajuda um estabelecimento a aparecer mais nas pesquisas</h4>
+              <h4>⚠️ São Marcos — Crítico</h4>
               <ul>
-                <li>Informações completas e atualizadas..</li>
-                <li>Site com informações consistentes.</li>
-                <li>Avaliações respondidas e fotos recentes.</li>
-                <li>Conteúdo alinhado com as buscas do público.</li>
-                <li>Presença consistente entre Google, site e redes sociais.</li>
+                <li>Apenas 16 avaliações com nota 3.4</li>
+                <li>Perfil não reivindicado</li>
+                <li>Sem website vinculado</li>
+                <li>Categoria não definida</li>
+                <li>Nomenclatura inconsistente (Vale dos Lagos vs. São Marcos)</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>🔴 Resgate — "Perfil Fantasma"</h4>
+              <ul>
+                <li>Apenas 8 avaliações com nota 3.6</li>
+                <li>Múltiplos perfis no Google Maps</li>
+                <li>Não otimizado, invisível nas buscas</li>
+                <li>Não aparece com ícone de bar no mapa</li>
+                <li>Perda de 100% do tráfego orgânico local</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>💡 Oportunidade</h4>
+              <ul>
+                <li>Reivindicar e otimizar perfis não gerenciados</li>
+                <li>Consolidar perfis duplicados do Resgate</li>
+                <li>Adicionar fotos, horários e informações completas</li>
+                <li>Responder avaliações para aumentar engajamento</li>
+                <li>Criar website próprio para fortalecer SEO</li>
               </ul>
             </div>
           </div>
         </section>
-        <br>
 
         <section id="marketing" class="reveal">
           <div class="section-title">
             <div>
-              <h3>O que os próprios clientes estão dizendo</h3>
-              <p>As avaliações revelam exatamente como as pessoas descrevem a experiência no Tamo Junto. Essas percepções ajudam a identificar os pontos mais valorizados pelos clientes e também oportunidades de melhoria.</p>
+              <h3>Insights para Marketing</h3>
+              <p>O que os clientes realmente valorizam e como comunicar isso.</p>
             </div>
           </div>
-
-          <div class="quote-grid">
-            <div class="quote"><p>“Aprenda a butecar!”</p><small>Potencial de slogan de campanha</small></div>
-            <div class="quote"><p>“Cerveja geladíssima e tira-gosto top.”</p><small>Atributo sensorial para anúncios</small></div>
-            <div class="quote"><p>“O arrocha da sofrência, samba de primeira.”</p><small>Linguagem autêntica baiana</small></div>
-            <div class="quote"><p>“Um fervo em Salvador, local com gente bonita.”</p><small>Apelo social para Meta Ads</small></div>
-            <div class="quote"><p>“O bumerangue deles é divino.”</p><small>Destaque de produto específico</small></div>
-            <div class="quote"><p>“Próximo a tudo. Simplesmente vão!”</p><small>Call-to-action orgânico</small></div>
+          <div class="grid grid-2">
+            <div class="card">
+              <h4>🎯 Pontos Fortes para Comunicar</h4>
+              <ul>
+                <li><strong>Cerveja geladíssima</strong> — mencionada em quase 100% das avaliações positivas</li>
+                <li><strong>Espetinhos artesanais</strong> — elogiados consistentemente</li>
+                <li><strong>Música ao vivo</strong> — diferencial de entretenimento</li>
+                <li><strong>Caranguejo do viveiro</strong> — experiência única</li>
+                <li><strong>Preço justo</strong> — percebido como acessível</li>
+                <li><strong>Ambiente descontraído</strong> — botequim autêntico</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>🎬 Frases com Potencial Publicitário</h4>
+              <ul>
+                <li>"Aprenda a butecar!" — identidade forte, pode virar slogan</li>
+                <li>"Cerveja geladíssima" — atributo sensorial de alto impacto</li>
+                <li>"Um fervo em Salvador" — apelo social e pertencimento</li>
+                <li>"Lugar maravilhoso" — superlativo espontâneo</li>
+                <li>"Ótima opção para uma sexta feira" — ocasião de consumo clara</li>
+                <li>"Próximo a tudo! Simplesmente vão!" — call-to-action orgânico</li>
+              </ul>
+            </div>
           </div>
         </section>
-        <br>
 
         <section id="swot" class="reveal">
           <div class="section-title">
@@ -551,7 +327,7 @@
         </section>
         <br>
 
-        <section class="reveal">
+        <section id="recomend" class="reveal">
           <div class="section-title">
             <div>
               <h3>O que recomendamos fazer primeiro</h3>
@@ -607,22 +383,6 @@
     </main>
   </div>
 
-  <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    },{threshold:.12});
-    reveals.forEach(el=>obs.observe(el));
-
-    const links = document.querySelectorAll('.menu a');
-    links.forEach(link=>{
-      link.addEventListener('click',()=>{
-        links.forEach(l=>l.classList.remove('active'));
-        link.classList.add('active');
-      });
-    });
-  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>
